@@ -1,0 +1,34 @@
+exclude:
+  - "*/tests/*"
+  - "*/migrations/*"
+tests:
+  B101:
+    severity: HIGH
+    confidence: HIGH
+  B102:
+    severity: MEDIUM
+    confidence: MEDIUM
+  B301:
+    severity: HIGH
+    confidence: HIGH
+  B302:
+    severity: MEDIUM
+    confidence: MEDIUM
+  B303:
+    severity: HIGH
+    confidence: HIGH
+  B324:
+    severity: HIGH
+    confidence: HIGH
+plugins:
+  blacklist_calls:
+    bad_name_sets:
+      - name: exec
+        message: "Use of exec is discouraged due to security risks."
+        level: HIGH
+      - name: eval
+        message: "Use of eval is discouraged due to security risks."
+        level: HIGH
+settings:
+  output_format: json
+  output_file: /app/bandit_report.json

@@ -12,6 +12,18 @@ pipeline {
                 sh 'docker run --rm -v $(pwd):/data ghcr.io/pycqa/bandit/bandit -r /data -f xml -o /data/report.xml || true'
                 sh ' docker run -v $(pwd):/data -v ./config.yml:/data/config.yml ghcr.io/pycqa/bandit/bandit:latest -r /data -c /data/config.yml -o /data/report4.json || true'
             }
+            post {
+         always {
+                 publishHTML(target: [
+                    allowMissing: false,
+                    alwaysLinkToLastBuild: true,
+                    keepAll: true,
+                    reportDir: '/var/lib/jenkins/workspace/BANDIT',
+                    reportFiles: 'report.html',
+                    reportName: 'BANDIT'
+                    ])
+                }
+            }
         }
     }
 }

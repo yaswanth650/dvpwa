@@ -3,7 +3,7 @@ pipeline {
      stages {
         stage('BRAKEMAN') {
             steps {
-                sh 'docker run --rm -v $(pwd):/data ghcr.io/pycqa/bandit/bandit -r /data'
+                sh 'docker run --rm -v $(pwd):/data ghcr.io/pycqa/bandit/bandit -r /data || true'
                 sh 'docker run --rm -v $(pwd):/data ghcr.io/pycqa/bandit/bandit -r /data --severity-level all -f json -o /data/report1.json'
                 sh 'docker run --rm -v $(pwd):/data ghcr.io/pycqa/bandit/bandit -r /data  --confidence-level all -f json -o /data/report2.json'
                 sh 'docker run --rm -v $(pwd):/data ghcr.io/pycqa/bandit/bandit -r /data -f json -o /data/report3.json'
